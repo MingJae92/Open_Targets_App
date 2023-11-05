@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bar, Radar } from 'react-chartjs-2';
-  
+
 function DataTable({ targets }) {
   const [selectedTarget, setSelectedTarget] = useState(null);
 
@@ -8,16 +8,14 @@ function DataTable({ targets }) {
     setSelectedTarget(target);
   };
 
-  // Ensure that chartData is defined and not null before accessing its properties
   const chartData = selectedTarget ? (selectedTarget.datatypeScores || []) : [];
 
   const chartTitle = selectedTarget
     ? `Data Type Scores: ${selectedTarget.target.approvedSymbol} and lung carcinoma`
     : '';
 
-    const chartLabels = chartData ? chartData.map((data) => data.id) : [];
-    const chartScores = chartData ? chartData.map((data) => data.score) : [];
-    
+  const chartLabels = chartData.map((data) => data.id);
+  const chartScores = chartData.map((data) => data.score);
 
   const barChartData = {
     labels: chartLabels,
@@ -56,7 +54,7 @@ function DataTable({ targets }) {
           </tr>
         </thead>
         <tbody>
-          {targets.map((target) => (
+          {targets && targets.length > 0 && targets.map((target) => (
             <tr key={target.target.id}>
               <td>
                 <a href={`https://platform.opentargets.org/target/${target.target.approvedName}`}>
@@ -92,5 +90,3 @@ function DataTable({ targets }) {
 }
 
 export default DataTable;
-
-
