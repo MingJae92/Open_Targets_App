@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const API_URL = 'https://api.platform.opentargets.org/api/v4/graphql';
+const API_URL = ' https://api.platform.opentargets.org/api/v4/disease';
 
 function DiseaseTargets() {
   const [data, setData] = useState([]);
@@ -45,7 +45,8 @@ function DiseaseTargets() {
   return (
     <div>
       <h1>Lung Carcinoma Associated Targets</h1>
-     
+     <li>
+     </li>
     </div>
   );
 }
