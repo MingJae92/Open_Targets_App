@@ -1,10 +1,10 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App';
 
 const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
+  uri: ' https://api.platform.opentargets.org/api/v4/graphql',
   cache: new InMemoryCache(),
 });
 

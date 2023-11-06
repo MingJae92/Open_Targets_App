@@ -29,8 +29,12 @@ function OpenTargetsApp() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const targets = data.disease.associatedTargets.rows;
+  // Clone the targets array before sorting
+  const targets = [...data.disease.associatedTargets.rows];
+
+  // Sort the copied array
   targets.sort((a, b) => b.score - a.score);
+
   const topTargets = targets.slice(0, 10);
 
   return (

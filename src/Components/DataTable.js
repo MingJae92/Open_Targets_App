@@ -17,31 +17,35 @@ function DataTable({ targets }) {
   const chartLabels = chartData.map((data) => data.id);
   const chartScores = chartData.map((data) => data.score);
 
-  const barChartData = {
-    labels: chartLabels,
-    datasets: [
-      {
-        label: 'Data Type Scores',
-        data: chartScores,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
+  const barChartData = selectedTarget
+    ? {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: 'Data Type Scores',
+            data: chartScores,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
+    : null;
 
-  const radarChartData = {
-    labels: chartLabels,
-    datasets: [
-      {
-        label: 'Data Type Scores',
-        data: chartScores,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
+  const radarChartData = selectedTarget
+    ? {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: 'Data Type Scores',
+            data: chartScores,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+        ],
+      }
+    : null;
 
   return (
     <div>
@@ -76,12 +80,16 @@ function DataTable({ targets }) {
           <h2>{chartTitle}</h2>
           <button onClick={() => toggleChart(null)}>Close</button>
           <div>
-            <div>
-              <Bar data={barChartData} />
-            </div>
-            <div>
-              <Radar data={radarChartData} />
-            </div>
+            {barChartData && (
+              <div>
+                <Bar data={barChartData} />
+              </div>
+            )}
+            {radarChartData && (
+              <div>
+                <Radar data={radarChartData} />
+              </div>
+            )}
           </div>
         </div>
       )}
