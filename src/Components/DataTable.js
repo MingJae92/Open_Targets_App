@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Bar, Radar } from 'react-chartjs-2';
-import { CategoryScale, LinearScale, BarElement, BarController, LineElement, LineController, Chart } from 'chart.js';
+import { CategoryScale, LinearScale, ScatterController, PointElement, Chart } from 'chart.js';
 
-Chart.register(CategoryScale, LinearScale, BarElement, BarController, LineElement, LineController);
+
+Chart.register(CategoryScale, LinearScale, ScatterController, PointElement);
 
 
 function DataTable({ targets }) {
