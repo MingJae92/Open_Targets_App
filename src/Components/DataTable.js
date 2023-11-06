@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Bar, Radar } from 'react-chartjs-2';
+import { CategoryScale, LinearScale, BarElement, BarController, LineElement, LineController, Chart } from 'chart.js';
+
+Chart.register(CategoryScale, LinearScale, BarElement, BarController, LineElement, LineController);
+
 
 function DataTable({ targets }) {
   const [selectedTarget, setSelectedTarget] = useState(null);
@@ -7,45 +11,6 @@ function DataTable({ targets }) {
   const toggleChart = (target) => {
     setSelectedTarget(target);
   };
-
-  const chartData = selectedTarget ? (selectedTarget.datatypeScores || []) : [];
-
-  const chartTitle = selectedTarget
-    ? `Data Type Scores: ${selectedTarget.target.approvedSymbol} and lung carcinoma`
-    : '';
-
-  const chartLabels = chartData.map((data) => data.id);
-  const chartScores = chartData.map((data) => data.score);
-
-  const barChartData = selectedTarget
-    ? {
-        labels: chartLabels,
-        datasets: [
-          {
-            label: 'Data Type Scores',
-            data: chartScores,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-          },
-        ],
-      }
-    : null;
-
-  const radarChartData = selectedTarget
-    ? {
-        labels: chartLabels,
-        datasets: [
-          {
-            label: 'Data Type Scores',
-            data: chartScores,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-          },
-        ],
-      }
-    : null;
 
   return (
     <div>
@@ -77,17 +42,45 @@ function DataTable({ targets }) {
 
       {selectedTarget && (
         <div>
-          <h2>{chartTitle}</h2>
+          <h2>Data Type Scores: {selectedTarget.target.approvedSymbol} and lung carcinoma</h2>
           <button onClick={() => toggleChart(null)}>Close</button>
           <div>
-            {barChartData && (
+            {/* Display a Bar chart if data is available */}
+            {selectedTarget.datatypeScores && (
               <div>
-                <Bar data={barChartData} />
+                <Bar
+                  data={{
+                    labels: selectedTarget.datatypeScores.map((data) => data.id),
+                    datasets: [
+                      {
+                        label: 'Data Type Scores',
+                        data: selectedTarget.datatypeScores.map((data) => data.score),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                />
               </div>
             )}
-            {radarChartData && (
+            {/* Display a Radar chart if data is available */}
+            {selectedTarget.datatypeScores && (
               <div>
-                <Radar data={radarChartData} />
+                <Radar
+                  data={{
+                    labels: selectedTarget.datatypeScores.map((data) => data.id),
+                    datasets: [
+                      {
+                        label: 'Data Type Scores',
+                        data: selectedTarget.datatypeScores.map((data) => data.score),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                      },
+                    ],
+                  }}
+                />
               </div>
             )}
           </div>
