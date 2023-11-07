@@ -5,7 +5,6 @@ import { CategoryScale, LinearScale, ScatterController, PointElement, Chart } fr
 
 Chart.register(CategoryScale, LinearScale, ScatterController, PointElement);
 
-
 function DataTable({ targets }) {
   const [selectedTarget, setSelectedTarget] = useState(null);
 
@@ -14,8 +13,8 @@ function DataTable({ targets }) {
   };
 
   return (
-    <div>
-      <table>
+    <div className="text-center"> {/* Center the content */}
+      <table className="mx-auto"> {/* Center the table */}
         <thead>
           <tr>
             <th>Approved Symbol</th>
@@ -45,7 +44,7 @@ function DataTable({ targets }) {
         <div>
           <h2>Data Type Scores: {selectedTarget.target.approvedSymbol} and lung carcinoma</h2>
           <button onClick={() => toggleChart(null)}>Close</button>
-          <div>
+          <div className="d-flex justify-content-center"> {/* Center the chart div */}
             {/* Display a Bar chart if data is available */}
             {selectedTarget.datatypeScores && (
               <div>
